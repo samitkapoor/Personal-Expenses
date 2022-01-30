@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:personal_expenses/controller/expense_controller.dart';
 
 import 'package:personal_expenses/core/home_page.dart';
 
@@ -7,10 +9,15 @@ class PersonalExpenses extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    //initialising the controller
+    ExpenseController expenseController = Get.put(ExpenseController());
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
+      //theme that is followed throughout the application
       theme: ThemeData(
         scaffoldBackgroundColor: const Color(0xff262424),
+        primaryColor: const Color(0xff262424),
+        highlightColor: const Color(0xff9381d6),
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.transparent,
           elevation: 0,
@@ -49,6 +56,20 @@ class PersonalExpenses extends StatelessWidget {
           preferBelow: true,
           triggerMode: TooltipTriggerMode.longPress,
           verticalOffset: 30,
+        ),
+        textTheme: const TextTheme(
+          bodyText1: TextStyle(
+            fontFamily: 'OpenSans',
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+            color: Color(0xff262424),
+          ),
+          bodyText2: TextStyle(
+            fontFamily: 'OpenSans',
+            fontSize: 25,
+            fontWeight: FontWeight.w600,
+            color: Color(0xff262424),
+          ),
         ),
       ),
       home: Homepage(),
