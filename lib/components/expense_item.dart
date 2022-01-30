@@ -10,9 +10,12 @@ class ExpenseItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 5),
-      color: const Color(0xff8068d9),
       width: Get.width,
       height: 55,
+      decoration: BoxDecoration(
+        color: const Color(0xff8068d9),
+        borderRadius: BorderRadius.circular(8),
+      ),
       child: Row(
         children: [
           Expanded(

@@ -39,6 +39,7 @@ class InsertRecordBottomSheet extends StatelessWidget {
               prefixIcon: Icon(
                 Icons.shopping_cart_outlined,
                 color: Get.theme.primaryColor,
+                size: 35,
               ),
               onChanged: (str) {
                 expenseRecord.nameOfTheRecord = str.toString();
@@ -50,11 +51,13 @@ class InsertRecordBottomSheet extends StatelessWidget {
               prefixIcon: Icon(
                 Icons.attach_money_rounded,
                 color: Get.theme.primaryColor,
+                size: 35,
               ),
               onChanged: (str) {
                 expenseRecord.price = double.parse(str.toString());
               },
             ),
+            const SizedBox(height: 30),
             //submit button in the bottom sheet
             ElevatedButton(
               onPressed: _submitFunction,
@@ -69,6 +72,7 @@ class InsertRecordBottomSheet extends StatelessWidget {
               ),
               style: ElevatedButton.styleFrom(
                 primary: Get.theme.primaryColor,
+                padding: const EdgeInsets.symmetric(vertical: 5),
               ),
             ),
           ],
@@ -95,6 +99,7 @@ getTextFormField({
       floatingLabelBehavior: FloatingLabelBehavior.auto,
       prefixIcon: prefixIcon,
       errorStyle: Get.theme.textTheme.subtitle1,
+      isDense: true,
     ),
     autovalidateMode: AutovalidateMode.onUserInteraction,
     keyboardType: textInputType,

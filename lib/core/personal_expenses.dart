@@ -72,7 +72,7 @@ class PersonalExpenses extends StatelessWidget {
           ),
           subtitle1: TextStyle(
             fontFamily: 'OpenSans',
-            fontSize: 20,
+            fontSize: 15,
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),
