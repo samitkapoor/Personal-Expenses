@@ -41,6 +41,16 @@ class Homepage extends StatelessWidget {
                         onDismissed: (direction) {
                           controller.deleteRecord(ele);
                         },
+                        background: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: const [
+                            Icon(
+                              Icons.delete,
+                              size: 35,
+                              color: Colors.red,
+                            ),
+                          ],
+                        ),
                         child: ExpenseItem(expenseRecord: ele),
                       ),
                     );
