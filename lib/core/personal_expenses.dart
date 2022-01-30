@@ -33,6 +33,23 @@ class PersonalExpenses extends StatelessWidget {
           ),
           splashColor: const Color(0xff262424),
         ),
+        iconTheme: const IconThemeData(
+          color: Colors.white,
+          size: 32,
+          opacity: 1,
+        ),
+        tooltipTheme: const TooltipThemeData(
+          textStyle: TextStyle(
+            fontFamily: 'OpenSans',
+            color: Colors.white,
+            fontSize: 16,
+          ),
+          waitDuration: Duration(seconds: 2),
+          showDuration: Duration(seconds: 2),
+          preferBelow: true,
+          triggerMode: TooltipTriggerMode.longPress,
+          verticalOffset: 30,
+        ),
       ),
       home: Homepage(),
     );
