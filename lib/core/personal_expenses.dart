@@ -90,6 +90,13 @@ class PersonalExpenses extends StatelessWidget {
             // color: Color(0xff262424),
             color: Color(0xfff7f2f2),
           ),
+          headline3: TextStyle(
+            fontFamily: 'OpenSans',
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+            // color: Color(0xff262424),
+            color: Colors.black,
+          ),
         ),
       ),
       home: Homepage(),
