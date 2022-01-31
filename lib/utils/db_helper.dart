@@ -56,7 +56,9 @@ class DatabaseHelper {
       DateTime dateTime) async {
     Database db = await database;
     String filterId = dateTime.day.toString() +
+        '/' +
         dateTime.month.toString() +
+        '/' +
         dateTime.year.toString();
     var result = await db
         .query(expenseTable, where: '$colId = ?', whereArgs: [filterId]);
