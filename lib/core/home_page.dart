@@ -20,7 +20,7 @@ class Homepage extends StatelessWidget {
 
   getDialog(ExpenseRecord expenseRecord) {
     return SimpleDialog(
-      backgroundColor: Colors.purple,
+      backgroundColor: Get.theme.highlightColor,
       contentPadding: const EdgeInsets.all(10),
       alignment: Alignment.center,
       insetPadding: const EdgeInsets.all(10),
@@ -98,7 +98,7 @@ class Homepage extends StatelessWidget {
           onPressed: () async {
             await insertRecordBottomSheet();
           },
-          child: const Icon(Icons.add),
+          child: const Icon(Icons.add, color: Colors.black, size: 50),
           tooltip: 'Add Record',
         ),
       ),

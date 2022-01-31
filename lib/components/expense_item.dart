@@ -13,7 +13,7 @@ class ExpenseItem extends StatelessWidget {
       width: Get.width,
       height: 55,
       decoration: BoxDecoration(
-        color: const Color(0xff8068d9),
+        color: Get.theme.highlightColor,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(

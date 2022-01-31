@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:personal_expenses/controller/expense_controller.dart';
 
+import 'package:personal_expenses/controller/expense_controller.dart';
 import 'package:personal_expenses/core/home_page.dart';
 
 class PersonalExpenses extends StatelessWidget {
@@ -17,23 +17,23 @@ class PersonalExpenses extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: const Color(0xff262424),
         primaryColor: const Color(0xff262424),
-        highlightColor: const Color(0xff9381d6),
-        indicatorColor: Colors.white,
+        highlightColor: Color(0xff1054ad),
+        indicatorColor: Colors.black,
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.transparent,
           elevation: 0,
           centerTitle: false,
-          foregroundColor: Color(0xff9381d6),
+          foregroundColor: Color(0xff1054ad),
           titleTextStyle: TextStyle(
             fontStyle: FontStyle.italic,
-            color: Color(0xff9381d6),
-            fontWeight: FontWeight.w600,
+            color: Color(0xff1054ad),
+            fontWeight: FontWeight.w900,
             fontFamily: 'OpenSans',
             fontSize: 28,
           ),
         ),
         floatingActionButtonTheme: FloatingActionButtonThemeData(
-          backgroundColor: const Color(0xff9381d6),
+          backgroundColor: const Color(0xff1054ad),
           elevation: 20,
           focusElevation: 5,
           shape: RoundedRectangleBorder(
@@ -42,14 +42,14 @@ class PersonalExpenses extends StatelessWidget {
           splashColor: const Color(0xff262424),
         ),
         iconTheme: const IconThemeData(
-          color: Colors.white,
+          color: Colors.black,
           size: 32,
           opacity: 1,
         ),
         tooltipTheme: const TooltipThemeData(
           textStyle: TextStyle(
             fontFamily: 'OpenSans',
-            color: Colors.white,
+            color: Colors.black,
             fontSize: 16,
           ),
           waitDuration: Duration(seconds: 2),
@@ -71,7 +71,7 @@ class PersonalExpenses extends StatelessWidget {
             fontSize: 25,
             fontWeight: FontWeight.bold,
             // color: Color(0xff262424),
-            color: Colors.white,
+            color: Colors.black,
           ),
           subtitle1: TextStyle(
             fontFamily: 'OpenSans',
@@ -82,29 +82,28 @@ class PersonalExpenses extends StatelessWidget {
           headline1: TextStyle(
             fontFamily: 'OpenSans',
             fontSize: 25,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.bold,
+            fontStyle: FontStyle.italic,
             // color: Color(0xff262424),
-            color: Color(0xfff7f2f2),
+            color: Colors.black,
           ),
           headline2: TextStyle(
             fontFamily: 'OpenSans',
             fontSize: 25,
-            fontWeight: FontWeight.bold,
-            // color: Color(0xff262424),
-            color: Color(0xfff7f2f2),
+            fontWeight: FontWeight.w500,
+            color: Colors.black,
           ),
           headline3: TextStyle(
             fontFamily: 'OpenSans',
             fontSize: 18,
             fontWeight: FontWeight.w600,
-            // color: Color(0xff262424),
-            color: Colors.white,
+            color: Colors.black,
           ),
           headline4: TextStyle(
             fontFamily: 'OpenSans',
             fontSize: 20,
             fontWeight: FontWeight.w600,
-            color: Colors.white,
+            color: Colors.black,
           ),
         ),
       ),
