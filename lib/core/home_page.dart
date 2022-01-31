@@ -54,7 +54,7 @@ class Homepage extends StatelessWidget {
                 onPressed: () {
                   Get.close(1);
                 },
-                child: Text('ok', style: Get.theme.tooltipTheme.textStyle),
+                child: Text('OK', style: Get.theme.textTheme.headline4),
               ),
             ),
           ],

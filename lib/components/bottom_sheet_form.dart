@@ -1,6 +1,3 @@
-// bottom sheet that appears on pressing the floating action button
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
