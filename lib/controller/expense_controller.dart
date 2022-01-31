@@ -12,14 +12,12 @@ class ExpenseController extends GetxController {
     final Future<Database> dbFuture = databaseHelper!.initializeDatabase();
     dbFuture.then((database) {
       Future<List<ExpenseRecord>> expenseRecordList =
-          databaseHelper!.getExpenseList();
+          databaseHelper!.getExpenseRecordList();
 
       expenseRecordList.then((recordsList) {
         allRecords = recordsList;
         update();
       });
-
-      update();
     });
   }
 
@@ -47,14 +45,11 @@ class ExpenseController extends GetxController {
   void deleteRecord(ExpenseRecord expenseRecord) async {
     int result = await databaseHelper!.deleteExpenseRecord(expenseRecord);
     if (result != 0) {
-      Get.snackbar('Record Deleted!', '');
       allRecords.removeWhere((element) => element.id == expenseRecord.id);
     } else {
       Get.snackbar('ERROR', 'Couldn\'t delete the record, restart the app');
     }
 
     updateAllRecords();
-
-    update();
   }
 }

@@ -54,45 +54,55 @@ class Homepage extends StatelessWidget {
         ),
         body: GetBuilder<ExpenseController>(
           builder: (controller) {
-            return ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-              physics: const BouncingScrollPhysics(),
-              children: [
-                ...controller.allRecords.reversed.map(
-                  (expenseRecord) {
-                    return InkWell(
-                      onTap: () async {
-                        await Get.dialog(getDialog(expenseRecord));
-                      },
-                      child: Container(
-                        margin: const EdgeInsets.symmetric(
-                            vertical: 5, horizontal: 5),
-                        child: Dismissible(
-                          key: ObjectKey(expenseRecord.id),
-                          direction: DismissDirection.endToStart,
-                          onDismissed: (direction) {
-                            controller.deleteRecord(expenseRecord);
-                          },
-                          background: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: const [
-                              Icon(
-                                Icons.delete,
-                                size: 35,
-                                color: Colors.red,
-                              ),
-                            ],
-                          ),
-                          child: ExpenseItem(
-                            expenseRecord: expenseRecord,
-                          ),
-                        ),
+            return controller.allRecords.isEmpty
+                ? const Center(
+                    child: Text(
+                      'No records yet!',
+                      style: TextStyle(
+                        color: Colors.white,
                       ),
-                    );
-                  },
-                ).toList(),
-              ],
-            );
+                    ),
+                  )
+                : ListView(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                    physics: const BouncingScrollPhysics(),
+                    children: [
+                      ...controller.allRecords.reversed.map(
+                        (expenseRecord) {
+                          return InkWell(
+                            onTap: () async {
+                              await Get.dialog(getDialog(expenseRecord));
+                            },
+                            child: Container(
+                              margin: const EdgeInsets.symmetric(
+                                  vertical: 5, horizontal: 5),
+                              child: Dismissible(
+                                key: ObjectKey(expenseRecord.id),
+                                direction: DismissDirection.endToStart,
+                                onDismissed: (direction) {
+                                  controller.deleteRecord(expenseRecord);
+                                },
+                                background: Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: const [
+                                    Icon(
+                                      Icons.delete,
+                                      size: 35,
+                                      color: Colors.red,
+                                    ),
+                                  ],
+                                ),
+                                child: ExpenseItem(
+                                  expenseRecord: expenseRecord,
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ).toList(),
+                    ],
+                  );
           },
         ),
         floatingActionButton: FloatingActionButton(

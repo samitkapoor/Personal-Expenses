@@ -13,7 +13,6 @@ class InsertRecordBottomSheet extends StatelessWidget {
 
   void _submitFunction() {
     if (_formkey.currentState!.validate() == true) {
-      print('Adding the expense record...');
       var expenseController = Get.find<ExpenseController>();
       expenseRecord.id = DateTime.now().toString();
       expenseController.addRecord(expenseRecord);

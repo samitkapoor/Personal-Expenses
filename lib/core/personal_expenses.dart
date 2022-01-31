@@ -17,7 +17,7 @@ class PersonalExpenses extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: const Color(0xff262424),
         primaryColor: const Color(0xff262424),
-        highlightColor: Color(0xff42d6ff),
+        highlightColor: const Color(0xff42d6ff),
         indicatorColor: Colors.black,
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.transparent,

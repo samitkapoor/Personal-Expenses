@@ -45,7 +45,7 @@ class DatabaseHelper {
   }
 
   //fetch operation: Get all records from the database
-  Future<List<Map<String, dynamic>>> getExpenseMapList() async {
+  Future<List<Map<String, dynamic>>> getExpenseRecordMapList() async {
     Database db = await database;
 
     var result = await db.query(expenseTable);
@@ -67,14 +67,14 @@ class DatabaseHelper {
     return result;
   }
 
-  Future<List<ExpenseRecord>> getExpenseList() async {
-    var expenseRecordMapList = await getExpenseMapList();
+  Future<List<ExpenseRecord>> getExpenseRecordList() async {
+    var expenseRecordMapList = await getExpenseRecordMapList();
 
-    List<ExpenseRecord> expenseList = [];
-    expenseRecordMapList.forEach((element) {
-      expenseList.add(ExpenseRecord.fromMapObject(element));
-    });
+    List<ExpenseRecord> expenseRecordList = [];
+    for (var element in expenseRecordMapList) {
+      expenseRecordList.add(ExpenseRecord.fromMapObject(element));
+    }
 
-    return expenseList;
+    return expenseRecordList;
   }
 }
