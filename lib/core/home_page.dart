@@ -36,7 +36,7 @@ class Homepage extends StatelessWidget {
           style: Get.theme.textTheme.headline3,
         ),
         Text(
-          '${expenseRecord.id.day}/${expenseRecord.id.month}/${expenseRecord.id.year}',
+          '${expenseRecord.id}',
           style: Get.theme.textTheme.headline3,
         ),
       ],
