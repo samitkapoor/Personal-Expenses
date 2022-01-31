@@ -103,7 +103,7 @@ getTextFormField({
     cursorColor: Get.theme.primaryColor,
     cursorHeight: 25,
     cursorWidth: 2,
-    style: Get.theme.textTheme.bodyText2,
+    style: Get.theme.textTheme.headline4,
     toolbarOptions: const ToolbarOptions(
       copy: true,
       selectAll: true,
