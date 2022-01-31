@@ -49,7 +49,7 @@ class PersonalExpenses extends StatelessWidget {
         tooltipTheme: const TooltipThemeData(
           textStyle: TextStyle(
             fontFamily: 'OpenSans',
-            color: Colors.black,
+            color: Colors.white,
             fontSize: 16,
           ),
           waitDuration: Duration(seconds: 2),

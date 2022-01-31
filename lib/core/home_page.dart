@@ -56,8 +56,9 @@ class Homepage extends StatelessWidget {
           builder: (controller) {
             return ListView(
               padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+              physics: const BouncingScrollPhysics(),
               children: [
-                ...controller.allRecords.map(
+                ...controller.allRecords.reversed.map(
                   (expenseRecord) {
                     return InkWell(
                       onTap: () async {
