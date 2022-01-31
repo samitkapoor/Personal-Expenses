@@ -6,6 +6,7 @@ import 'package:sqflite/sqflite.dart';
 
 class ExpenseController extends GetxController {
   List<ExpenseRecord> allRecords = [];
+  DateTime selectedDate = DateTime.now();
   DatabaseHelper? databaseHelper;
 
   void updateAllRecords() {
@@ -51,5 +52,19 @@ class ExpenseController extends GetxController {
     }
 
     updateAllRecords();
+  }
+
+  void filterData(DateTime dateTime) {
+    selectedDate = dateTime;
+    final Future<Database> dbFuture = databaseHelper!.initializeDatabase();
+    dbFuture.then((database) {
+      Future<List<ExpenseRecord>> filteredExpenseRecordList =
+          databaseHelper!.getFilteredExpenseRecord(dateTime);
+
+      filteredExpenseRecordList.then((filteredRecordsList) {
+        allRecords = filteredRecordsList;
+        update();
+      });
+    });
   }
 }

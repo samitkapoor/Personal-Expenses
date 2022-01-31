@@ -18,6 +18,21 @@ class Homepage extends StatelessWidget {
     return Future.value();
   }
 
+  Future<void> getDatePicker(BuildContext context) async {
+    ExpenseController expenseController = Get.find<ExpenseController>();
+    await showDatePicker(
+      context: context,
+      initialDate: expenseController.selectedDate,
+      firstDate: DateTime(2000),
+      lastDate: DateTime.now(),
+    ).then((selectedDate) {
+      if (selectedDate != null) {
+        expenseController.filterData(selectedDate);
+      }
+    });
+    return Future.value();
+  }
+
   getDialog(ExpenseRecord expenseRecord) {
     return SimpleDialog(
       backgroundColor: Get.theme.highlightColor,
@@ -51,13 +66,22 @@ class Homepage extends StatelessWidget {
           title: const Text(
             'Personal Expenses',
           ),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.date_range_rounded),
+              onPressed: () {
+                getDatePicker(context);
+              },
+              tooltip: 'Filter date',
+            ),
+          ],
         ),
         body: GetBuilder<ExpenseController>(
           builder: (controller) {
             return controller.allRecords.isEmpty
                 ? const Center(
                     child: Text(
-                      'No records yet!',
+                      'No expense records!',
                       style: TextStyle(
                         color: Colors.white,
                       ),

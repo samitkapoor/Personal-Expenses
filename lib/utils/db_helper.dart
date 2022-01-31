@@ -52,6 +52,17 @@ class DatabaseHelper {
     return result;
   }
 
+  Future<List<Map<String, dynamic>>> getFilteredExpenseRecordMapList(
+      DateTime dateTime) async {
+    Database db = await database;
+    String filterId = dateTime.day.toString() +
+        dateTime.month.toString() +
+        dateTime.year.toString();
+    var result = await db
+        .query(expenseTable, where: '$colId = ?', whereArgs: [filterId]);
+    return result;
+  }
+
   //insert operation: insert an expense record to database
   Future<int> insertExpenseRecord(ExpenseRecord expenseRecord) async {
     Database db = await database;
@@ -63,7 +74,8 @@ class DatabaseHelper {
   Future<int> deleteExpenseRecord(ExpenseRecord expenseRecord) async {
     var db = await database;
     int result = await db.rawDelete(
-        'DELETE FROM $expenseTable WHERE $colId = ?', [expenseRecord.id]);
+        'DELETE FROM $expenseTable WHERE $colId = ? and $colNameOfTheRecord = ? and $colPrice = ?',
+        [expenseRecord.id, expenseRecord.nameOfTheRecord, expenseRecord.price]);
     return result;
   }
 
@@ -76,5 +88,18 @@ class DatabaseHelper {
     }
 
     return expenseRecordList;
+  }
+
+  // filtered fetch operation: when user wants to see the records of a specific date
+  Future<List<ExpenseRecord>> getFilteredExpenseRecord(
+      DateTime dateTime) async {
+    var filteredExpenseRecordMapList =
+        await getFilteredExpenseRecordMapList(dateTime);
+    List<ExpenseRecord> filteredExpenseRecordList = [];
+    for (var element in filteredExpenseRecordMapList) {
+      filteredExpenseRecordList.add(ExpenseRecord.fromMapObject(element));
+    }
+
+    return filteredExpenseRecordList;
   }
 }

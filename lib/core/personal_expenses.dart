@@ -31,6 +31,7 @@ class PersonalExpenses extends StatelessWidget {
             fontFamily: 'OpenSans',
             fontSize: 28,
           ),
+          actionsIconTheme: IconThemeData(color: Colors.white, size: 32),
         ),
         floatingActionButtonTheme: FloatingActionButtonThemeData(
           backgroundColor: const Color(0xff42d6ff),
