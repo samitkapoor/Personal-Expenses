@@ -17,23 +17,23 @@ class PersonalExpenses extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: const Color(0xff262424),
         primaryColor: const Color(0xff262424),
-        highlightColor: Color(0xff1054ad),
+        highlightColor: Color(0xff42d6ff),
         indicatorColor: Colors.black,
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.transparent,
           elevation: 0,
           centerTitle: false,
-          foregroundColor: Color(0xff1054ad),
+          foregroundColor: Color(0xff42d6ff),
           titleTextStyle: TextStyle(
             fontStyle: FontStyle.italic,
-            color: Color(0xff1054ad),
+            color: Color(0xff42d6ff),
             fontWeight: FontWeight.w900,
             fontFamily: 'OpenSans',
             fontSize: 28,
           ),
         ),
         floatingActionButtonTheme: FloatingActionButtonThemeData(
-          backgroundColor: const Color(0xff1054ad),
+          backgroundColor: const Color(0xff42d6ff),
           elevation: 20,
           focusElevation: 5,
           shape: RoundedRectangleBorder(
