@@ -2,4 +2,4 @@
 A Personal Expenses tracking application!
 
 # Todo
-- Inject SQL 
+- Improve UI and more functionalities such as total cost, month wise distribution of expenses etc.
