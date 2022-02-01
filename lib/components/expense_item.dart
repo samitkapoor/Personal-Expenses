@@ -11,7 +11,7 @@ class ExpenseItem extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 5),
       width: Get.width,
-      height: 55,
+      height: 60,
       decoration: BoxDecoration(
         color: Get.theme.highlightColor,
         borderRadius: BorderRadius.circular(8),
@@ -19,12 +19,24 @@ class ExpenseItem extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            child: Text(
-              expenseRecord.nameOfTheRecord,
-              style: Get.theme.textTheme.headline1,
-              softWrap: true,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  expenseRecord.nameOfTheRecord,
+                  style: Get.theme.textTheme.headline1,
+                  softWrap: true,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                Text(
+                  expenseRecord.id,
+                  style: Get.theme.textTheme.subtitle2,
+                  softWrap: true,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
             ),
           ),
           Text(

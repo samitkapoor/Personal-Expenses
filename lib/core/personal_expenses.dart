@@ -82,7 +82,7 @@ class PersonalExpenses extends StatelessWidget {
           ),
           headline1: TextStyle(
             fontFamily: 'OpenSans',
-            fontSize: 25,
+            fontSize: 28,
             fontWeight: FontWeight.bold,
             fontStyle: FontStyle.italic,
             // color: Color(0xff262424),
@@ -90,7 +90,7 @@ class PersonalExpenses extends StatelessWidget {
           ),
           headline2: TextStyle(
             fontFamily: 'OpenSans',
-            fontSize: 25,
+            fontSize: 28,
             fontWeight: FontWeight.w500,
             color: Colors.black,
           ),
@@ -103,6 +103,12 @@ class PersonalExpenses extends StatelessWidget {
           headline4: TextStyle(
             fontFamily: 'OpenSans',
             fontSize: 20,
+            fontWeight: FontWeight.w600,
+            color: Colors.black,
+          ),
+          subtitle2: TextStyle(
+            fontFamily: 'OpenSans',
+            fontSize: 13,
             fontWeight: FontWeight.w600,
             color: Colors.black,
           ),
