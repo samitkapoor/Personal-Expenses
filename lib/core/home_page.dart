@@ -78,19 +78,35 @@ class Homepage extends StatelessWidget {
         ),
         body: GetBuilder<ExpenseController>(
           builder: (controller) {
-            return controller.allRecords.isEmpty
-                ? const Center(
-                    child: Text(
-                      'No expense records!',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                  )
-                : ListView(
+            return Stack(
+              children: [
+                controller.allRecords.isEmpty
+                    ? SizedBox(
+                        height: Get.height,
+                        child: const Center(
+                          child: Text(
+                            'No expense records!',
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      )
+                    : SizedBox(height: Get.height),
+                RefreshIndicator(
+                  color: Colors.black,
+                  backgroundColor: Colors.white,
+                  strokeWidth: 3,
+                  onRefresh: () {
+                    ExpenseController expenseController =
+                        Get.find<ExpenseController>();
+                    expenseController.updateAllRecords();
+                    return Future.value();
+                  },
+                  child: ListView(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                    physics: const BouncingScrollPhysics(),
+                    physics: const AlwaysScrollableScrollPhysics(),
                     children: [
                       ...controller.allRecords.reversed.map(
                         (expenseRecord) {
@@ -126,7 +142,10 @@ class Homepage extends StatelessWidget {
                         },
                       ).toList(),
                     ],
-                  );
+                  ),
+                ),
+              ],
+            );
           },
         ),
         floatingActionButton: FloatingActionButton(

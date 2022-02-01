@@ -34,7 +34,6 @@ class ExpenseController extends GetxController {
     int result = await databaseHelper!.insertExpenseRecord(expenseRecord);
     if (result != 0) {
       allRecords.add(expenseRecord);
-      updateAllRecords();
     } else {
       Get.snackbar('ERROR', 'Couldn\'t add the record');
     }
@@ -50,8 +49,7 @@ class ExpenseController extends GetxController {
     } else {
       Get.snackbar('ERROR', 'Couldn\'t delete the record, restart the app');
     }
-
-    updateAllRecords();
+    update();
   }
 
   void filterData(DateTime dateTime) {
