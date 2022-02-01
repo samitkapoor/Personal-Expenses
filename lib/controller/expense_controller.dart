@@ -45,7 +45,17 @@ class ExpenseController extends GetxController {
   void deleteRecord(ExpenseRecord expenseRecord) async {
     int result = await databaseHelper!.deleteExpenseRecord(expenseRecord);
     if (result != 0) {
-      allRecords.removeWhere((element) => element.id == expenseRecord.id);
+      int i = 0;
+      for (var element in allRecords) {
+        if (element.id == expenseRecord.id &&
+            element.nameOfTheRecord == expenseRecord.nameOfTheRecord &&
+            element.price == expenseRecord.price) {
+          break;
+        }
+        i++;
+      }
+
+      allRecords.removeAt(i);
     } else {
       Get.snackbar('ERROR', 'Couldn\'t delete the record, restart the app');
     }
