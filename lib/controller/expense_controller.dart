@@ -6,8 +6,41 @@ import 'package:sqflite/sqflite.dart';
 
 class ExpenseController extends GetxController {
   List<ExpenseRecord> allRecords = [];
+  double totalLastMonth = 0;
   DateTime selectedDate = DateTime.now();
   DatabaseHelper? databaseHelper;
+
+  void getTotalLastMonth() {
+    List<ExpenseRecord> recordsLastMonth = [];
+    final Future<Database> dbFuture = databaseHelper!.initializeDatabase();
+    dbFuture.then((database) {
+      int month = DateTime.now().month;
+      int year = DateTime.now().year;
+      if (DateTime.now().month == 1) {
+        month = 12;
+      } else {
+        month -= 1;
+        year -= 1;
+      }
+
+      String string = DateTime.now().day.toString() +
+          '/' +
+          month.toString() +
+          '/' +
+          year.toString();
+
+      Future<List<ExpenseRecord>> lastMonthExpenseRecordList =
+          databaseHelper!.getLastMonthExpenseRecord(string);
+      lastMonthExpenseRecordList.then((lastMonthList) {
+        recordsLastMonth = lastMonthList;
+        totalLastMonth = 0;
+        recordsLastMonth.forEach((expenseRecord) {
+          totalLastMonth += expenseRecord.price;
+        });
+        update();
+      });
+    });
+  }
 
   void updateAllRecords() {
     final Future<Database> dbFuture = databaseHelper!.initializeDatabase();
@@ -17,6 +50,7 @@ class ExpenseController extends GetxController {
 
       expenseRecordList.then((recordsList) {
         allRecords = recordsList;
+        getTotalLastMonth();
         update();
       });
     });
@@ -37,7 +71,7 @@ class ExpenseController extends GetxController {
     } else {
       Get.snackbar('ERROR', 'Couldn\'t add the record');
     }
-
+    getTotalLastMonth();
     update();
   }
 
@@ -59,6 +93,7 @@ class ExpenseController extends GetxController {
     } else {
       Get.snackbar('ERROR', 'Couldn\'t delete the record, restart the app');
     }
+    getTotalLastMonth();
     update();
   }
 

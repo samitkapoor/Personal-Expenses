@@ -65,6 +65,14 @@ class DatabaseHelper {
     return result;
   }
 
+  Future<List<Map<String, dynamic>>> getLastMonthExpenseRecordMapList(
+      String string) async {
+    Database db = await database;
+    var result =
+        await db.query(expenseTable, where: '$colId >= ?', whereArgs: [string]);
+    return result;
+  }
+
   //insert operation: insert an expense record to database
   Future<int> insertExpenseRecord(ExpenseRecord expenseRecord) async {
     Database db = await database;
@@ -103,5 +111,17 @@ class DatabaseHelper {
     }
 
     return filteredExpenseRecordList;
+  }
+
+  // last month fetch: when we want to fetch all the records of the last 31 days
+  Future<List<ExpenseRecord>> getLastMonthExpenseRecord(String string) async {
+    var lastMonthExpenseRecordMapList =
+        await getLastMonthExpenseRecordMapList(string);
+    List<ExpenseRecord> lastMonthExpenseRecordList = [];
+    for (var element in lastMonthExpenseRecordMapList) {
+      lastMonthExpenseRecordList.add(ExpenseRecord.fromMapObject(element));
+    }
+
+    return lastMonthExpenseRecordList;
   }
 }

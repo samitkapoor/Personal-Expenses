@@ -108,6 +108,27 @@ class Homepage extends StatelessWidget {
                         const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                     physics: const AlwaysScrollableScrollPhysics(),
                     children: [
+                      Container(
+                        height: 35,
+                        margin: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 10,
+                        ),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                'Total (last month): ',
+                                style: Get.theme.textTheme.headline5,
+                              ),
+                            ),
+                            Text(
+                              '₹${controller.totalLastMonth.toStringAsFixed(2)}',
+                              style: Get.theme.textTheme.headline5,
+                            ),
+                          ],
+                        ),
+                      ),
                       ...controller.allRecords.reversed.map(
                         (expenseRecord) {
                           return InkWell(
