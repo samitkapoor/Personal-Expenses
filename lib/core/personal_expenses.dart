@@ -74,12 +74,6 @@ class PersonalExpenses extends StatelessWidget {
             // color: Color(0xff262424),
             color: Colors.black,
           ),
-          subtitle1: TextStyle(
-            fontFamily: 'OpenSans',
-            fontSize: 15,
-            fontWeight: FontWeight.bold,
-            color: Colors.pink,
-          ),
           headline1: TextStyle(
             fontFamily: 'OpenSans',
             fontSize: 28,
@@ -97,7 +91,7 @@ class PersonalExpenses extends StatelessWidget {
           headline3: TextStyle(
             fontFamily: 'OpenSans',
             fontSize: 20,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w500,
             color: Colors.black,
           ),
           headline4: TextStyle(
@@ -105,6 +99,12 @@ class PersonalExpenses extends StatelessWidget {
             fontSize: 20,
             fontWeight: FontWeight.w600,
             color: Colors.black,
+          ),
+          subtitle1: TextStyle(
+            fontFamily: 'OpenSans',
+            fontSize: 15,
+            fontWeight: FontWeight.bold,
+            color: Colors.pink,
           ),
           subtitle2: TextStyle(
             fontFamily: 'OpenSans',
