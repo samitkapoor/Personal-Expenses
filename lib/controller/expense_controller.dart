@@ -16,18 +16,16 @@ class ExpenseController extends GetxController {
     dbFuture.then((database) {
       int month = DateTime.now().month;
       int year = DateTime.now().year;
+      int day = DateTime.now().day;
       if (DateTime.now().month == 1) {
         month = 12;
       } else {
         month -= 1;
-        year -= 1;
       }
+      year -= 1;
 
-      String string = DateTime.now().day.toString() +
-          '/' +
-          month.toString() +
-          '/' +
-          year.toString();
+      String string =
+          day.toString() + '/' + month.toString() + '/' + year.toString();
 
       Future<List<ExpenseRecord>> lastMonthExpenseRecordList =
           databaseHelper!.getLastMonthExpenseRecord(string);
