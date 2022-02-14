@@ -5,7 +5,7 @@ A Personal Expenses tracking application!
 
 Home screen                |                           | Demo
 :-------------------------:|:-------------------------:|:-------------------------:|
-![Screenshot_20220131-215015](https://user-images.githubusercontent.com/77121931/151833100-b1dc566d-29b3-47ff-b5f3-13ccb88b02bd.jpg)|![Screenshot_20220131-214913](https://user-images.githubusercontent.com/77121931/151833263-b73288a8-6b70-408e-9470-dd708779b6d0.jpg)|[![Watch the video](https://user-images.githubusercontent.com/77121931/151836620-54e67c33-39c8-4ac1-be9c-7ee0e3fbd931.png)](https://user-images.githubusercontent.com/77121931/151837295-36f20741-d4ce-4832-8523-f6ab09722574.mp4)
+![Screenshot_20220201-160657](https://user-images.githubusercontent.com/77121931/151953974-2838f8bc-9776-4965-bfea-912f7dac32a4.jpg)|![Screenshot_20220131-214913](https://user-images.githubusercontent.com/77121931/151833263-b73288a8-6b70-408e-9470-dd708779b6d0.jpg)|[![Watch the video](https://user-images.githubusercontent.com/77121931/151836620-54e67c33-39c8-4ac1-be9c-7ee0e3fbd931.png)](https://user-images.githubusercontent.com/77121931/151954198-c25cc901-115a-4be8-bb7f-6ee99e646d85.mp4)
 
 # Packages Used: 
 get - https://pub.dev/packages/get <br />
