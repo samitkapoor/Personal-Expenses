@@ -30,7 +30,7 @@ class ExpenseItem extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  expenseRecord.id,
+                  expenseRecord.date,
                   style: Get.theme.textTheme.subtitle2,
                   softWrap: true,
                   maxLines: 1,

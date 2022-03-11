@@ -7,19 +7,22 @@ import 'package:personal_expenses/model/expense_record.dart';
 class InsertRecordBottomSheet extends StatelessWidget {
   InsertRecordBottomSheet({Key? key}) : super(key: key);
   ExpenseRecord expenseRecord =
-      ExpenseRecord(nameOfTheRecord: '', id: '', price: 0);
+      ExpenseRecord(nameOfTheRecord: '', date: '', price: 0, id: 0);
 
   final GlobalKey<FormState> _formkey = GlobalKey();
+  ExpenseController expenseController = Get.find<ExpenseController>();
 
   void _submitFunction() {
     if (_formkey.currentState!.validate() == true) {
       var expenseController = Get.find<ExpenseController>();
-      expenseRecord.id = DateTime.now().day.toString() +
+      expenseRecord.date = DateTime.now().day.toString() +
           '/' +
           DateTime.now().month.toString() +
           '/' +
           DateTime.now().year.toString();
+      expenseRecord.id = expenseController.allRecords.length + 1;
       expenseController.addRecord(expenseRecord);
+      print(expenseRecord.id);
       Get.close(1);
     }
   }

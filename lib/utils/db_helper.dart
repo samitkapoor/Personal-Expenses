@@ -10,9 +10,10 @@ class DatabaseHelper {
   static Database? _database;
 
   String expenseTable = 'expense_table';
-  String colId = 'id';
+  String colDate = 'date';
   String colNameOfTheRecord = 'nameOfTheRecord';
   String colPrice = 'price';
+  String colId = 'id';
 
   DatabaseHelper.createInstance(); //named constructor to create instance of databasehelper
 
@@ -41,7 +42,7 @@ class DatabaseHelper {
 
   void _createDb(Database db, int newVersion) async {
     await db.execute(
-        'CREATE TABLE $expenseTable($colId TEXT, $colNameOfTheRecord TEXT, $colPrice DOUBLE)');
+        'CREATE TABLE $expenseTable($colId INTEGER, $colDate TEXT, $colNameOfTheRecord TEXT, $colPrice DOUBLE)');
   }
 
   //fetch operation: Get all records from the database
@@ -61,15 +62,17 @@ class DatabaseHelper {
         '/' +
         dateTime.year.toString();
     var result = await db
-        .query(expenseTable, where: '$colId = ?', whereArgs: [filterId]);
+        .query(expenseTable, where: '$colDate == ?', whereArgs: [filterId]);
     return result;
   }
 
   Future<List<Map<String, dynamic>>> getLastMonthExpenseRecordMapList(
-      String string) async {
+      String string1, String string2) async {
     Database db = await database;
-    var result =
-        await db.query(expenseTable, where: '$colId >= ?', whereArgs: [string]);
+    var result = await db.query(expenseTable,
+        where: '$colDate >= ? AND $colDate <= ?',
+        whereArgs: [string1, string2]);
+
     return result;
   }
 
@@ -84,8 +87,7 @@ class DatabaseHelper {
   Future<int> deleteExpenseRecord(ExpenseRecord expenseRecord) async {
     var db = await database;
     int result = await db.rawDelete(
-        'DELETE FROM $expenseTable WHERE $colId = ? and $colNameOfTheRecord = ? and $colPrice = ?',
-        [expenseRecord.id, expenseRecord.nameOfTheRecord, expenseRecord.price]);
+        'DELETE FROM $expenseTable WHERE $colId = ?', [expenseRecord.id]);
     return result;
   }
 
@@ -114,13 +116,16 @@ class DatabaseHelper {
   }
 
   // last month fetch: when we want to fetch all the records of the last 31 days
-  Future<List<ExpenseRecord>> getLastMonthExpenseRecord(String string) async {
+  Future<List<ExpenseRecord>> getLastMonthExpenseRecord(
+      String string1, String string2) async {
     var lastMonthExpenseRecordMapList =
-        await getLastMonthExpenseRecordMapList(string);
+        await getLastMonthExpenseRecordMapList(string1, string2);
     List<ExpenseRecord> lastMonthExpenseRecordList = [];
     for (var element in lastMonthExpenseRecordMapList) {
       lastMonthExpenseRecordList.add(ExpenseRecord.fromMapObject(element));
     }
+
+    lastMonthExpenseRecordList.forEach((e) => print(e.date + '/n'));
 
     return lastMonthExpenseRecordList;
   }

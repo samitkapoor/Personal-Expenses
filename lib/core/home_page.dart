@@ -9,7 +9,6 @@ import 'package:personal_expenses/model/expense_record.dart';
 class Homepage extends StatelessWidget {
   const Homepage({Key? key}) : super(key: key);
 
-  //function that triggers the bottom sheet to enter the record
   Future<void> insertRecordBottomSheet() {
     Get.bottomSheet(
       InsertRecordBottomSheet(),
@@ -51,7 +50,7 @@ class Homepage extends StatelessWidget {
           style: Get.theme.textTheme.headline3,
         ),
         Text(
-          '${expenseRecord.id}',
+          '${expenseRecord.date}',
           style: Get.theme.textTheme.headline3,
         ),
       ],
@@ -103,66 +102,65 @@ class Homepage extends StatelessWidget {
                     expenseController.updateAllRecords();
                     return Future.value();
                   },
-                  child: ListView(
+                  child: ListView.builder(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                     physics: const AlwaysScrollableScrollPhysics(),
-                    children: [
-                      Container(
-                        height: 35,
-                        margin: const EdgeInsets.symmetric(
-                          horizontal: 10,
-                          vertical: 10,
-                        ),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                'Total (last month): ',
-                                style: Get.theme.textTheme.headline5,
-                              ),
-                            ),
-                            Text(
-                              '₹${controller.totalLastMonth.toStringAsFixed(2)}',
-                              style: Get.theme.textTheme.headline5,
-                            ),
-                          ],
-                        ),
-                      ),
-                      ...controller.allRecords.reversed.map(
-                        (expenseRecord) {
-                          return InkWell(
-                            onTap: () async {
-                              await Get.dialog(getDialog(expenseRecord));
-                            },
-                            child: Container(
-                              margin: const EdgeInsets.symmetric(
-                                  vertical: 5, horizontal: 5),
-                              child: Dismissible(
-                                key: ObjectKey(expenseRecord.id),
-                                direction: DismissDirection.endToStart,
-                                onDismissed: (direction) {
-                                  controller.deleteRecord(expenseRecord);
-                                },
-                                background: Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: const [
-                                    Icon(
-                                      Icons.delete,
-                                      size: 35,
-                                      color: Colors.red,
-                                    ),
-                                  ],
-                                ),
-                                child: ExpenseItem(
-                                  expenseRecord: expenseRecord,
-                                ),
-                              ),
-                            ),
-                          );
+                    itemCount: controller.allRecords.length,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () async {
+                          await Get.dialog(getDialog(controller.allRecords[
+                              controller.allRecords.length - index - 1]));
                         },
-                      ).toList(),
-                    ],
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(
+                              vertical: 5, horizontal: 5),
+                          child: Dismissible(
+                            key: UniqueKey(),
+                            direction: DismissDirection.endToStart,
+                            onDismissed: (direction) {
+                              controller.updateLastDeletedRecord(controller
+                                      .allRecords[
+                                  controller.allRecords.length - index - 1]);
+                              controller.deleteRecord(controller.allRecords[
+                                  controller.allRecords.length - index - 1]);
+                              controller.updateAllRecords();
+                              ScaffoldMessenger.of(context)
+                                  .removeCurrentSnackBar();
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('Record deleted!'),
+                                  action: SnackBarAction(
+                                    label: 'Undo',
+                                    onPressed: () {
+                                      print(controller.lastDeletedRecord?.id);
+                                      controller.addRecord(
+                                          controller.lastDeletedRecord!);
+                                      controller.updateAllRecords();
+                                    },
+                                  ),
+                                ),
+                              );
+                            },
+                            background: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: const [
+                                Icon(
+                                  Icons.delete,
+                                  size: 35,
+                                  color: Colors.red,
+                                ),
+                              ],
+                            ),
+                            child: ExpenseItem(
+                              expenseRecord: controller.allRecords[
+                                  controller.allRecords.length - index - 1],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 ),
               ],

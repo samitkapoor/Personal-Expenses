@@ -9,6 +9,12 @@ class ExpenseController extends GetxController {
   double totalLastMonth = 0;
   DateTime selectedDate = DateTime.now();
   DatabaseHelper? databaseHelper;
+  ExpenseRecord? lastDeletedRecord;
+
+  void updateLastDeletedRecord(ExpenseRecord expenseRecord) {
+    lastDeletedRecord = expenseRecord;
+    update();
+  }
 
   void getTotalLastMonth() {
     List<ExpenseRecord> recordsLastMonth = [];
@@ -19,24 +25,48 @@ class ExpenseController extends GetxController {
       int day = DateTime.now().day;
       if (DateTime.now().month == 1) {
         month = 12;
+        year -= 1;
       } else {
         month -= 1;
       }
-      year -= 1;
 
-      String string =
+      String string1 =
           day.toString() + '/' + month.toString() + '/' + year.toString();
+      String string2 = '1/' +
+          DateTime.now().month.toString() +
+          '/' +
+          DateTime.now().year.toString();
+      totalLastMonth = 0;
 
-      Future<List<ExpenseRecord>> lastMonthExpenseRecordList =
-          databaseHelper!.getLastMonthExpenseRecord(string);
+      Future<List<ExpenseRecord>> lastMonthExpenseRecordList = databaseHelper!
+          .getLastMonthExpenseRecord(
+              string1, '31/${month.toString()}/${year.toString()}');
+
       lastMonthExpenseRecordList.then((lastMonthList) {
         recordsLastMonth = lastMonthList;
-        totalLastMonth = 0;
         recordsLastMonth.forEach((expenseRecord) {
           totalLastMonth += expenseRecord.price;
         });
-        update();
       });
+
+      lastMonthExpenseRecordList = databaseHelper!.getLastMonthExpenseRecord(
+          string2,
+          '${DateTime.now().day.toString()}/${DateTime.now().month.toString()}/${DateTime.now().year.toString()}');
+      lastMonthExpenseRecordList.then((lastMonthList) {
+        recordsLastMonth = lastMonthList;
+        recordsLastMonth.forEach((expenseRecord) {
+          totalLastMonth += expenseRecord.price;
+        });
+      });
+
+      lastMonthExpenseRecordList =
+          databaseHelper!.getFilteredExpenseRecord(DateTime.now());
+      lastMonthExpenseRecordList.then((todayList) {
+        todayList.forEach((expenseRecord) {
+          totalLastMonth += expenseRecord.price;
+        });
+      });
+      update();
     });
   }
 
@@ -48,6 +78,9 @@ class ExpenseController extends GetxController {
 
       expenseRecordList.then((recordsList) {
         allRecords = recordsList;
+        allRecords.sort((a, b) {
+          return a.id < b.id ? 0 : 1;
+        });
         getTotalLastMonth();
         update();
       });
@@ -79,14 +112,11 @@ class ExpenseController extends GetxController {
     if (result != 0) {
       int i = 0;
       for (var element in allRecords) {
-        if (element.id == expenseRecord.id &&
-            element.nameOfTheRecord == expenseRecord.nameOfTheRecord &&
-            element.price == expenseRecord.price) {
+        if (element.id == expenseRecord.id) {
           break;
         }
         i++;
       }
-
       allRecords.removeAt(i);
     } else {
       Get.snackbar('ERROR', 'Couldn\'t delete the record, restart the app');
