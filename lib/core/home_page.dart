@@ -86,7 +86,7 @@ class Homepage extends StatelessWidget {
                           child: Text(
                             'No expense records!',
                             style: TextStyle(
-                              color: Colors.white,
+                              color: Colors.black,
                             ),
                           ),
                         ),

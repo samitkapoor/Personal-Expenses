@@ -11,7 +11,7 @@ class ExpenseItem extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 15),
       width: Get.width,
-      height: 70,
+      height: 55,
       decoration: BoxDecoration(
         color: Get.theme.highlightColor,
         borderRadius: BorderRadius.circular(8),
