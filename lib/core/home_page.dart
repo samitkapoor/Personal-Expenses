@@ -32,48 +32,34 @@ class Homepage extends StatelessWidget {
     return Future.value();
   }
 
-  getDialog(ExpenseRecord expenseRecord) {
-    return SimpleDialog(
-      backgroundColor: Get.theme.highlightColor,
-      contentPadding: const EdgeInsets.all(10),
-      alignment: Alignment.center,
-      insetPadding: const EdgeInsets.all(10),
-      titlePadding: const EdgeInsets.all(10),
-      title: Text(
-        expenseRecord.nameOfTheRecord,
-        style: Get.theme.textTheme.bodyText2,
-        textAlign: TextAlign.center,
-      ),
-      children: [
-        Text(
-          '₹${expenseRecord.price.toStringAsFixed(2)}',
-          style: Get.theme.textTheme.headline3,
-        ),
-        Text(
-          '${expenseRecord.date}',
-          style: Get.theme.textTheme.headline3,
-        ),
-      ],
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        drawer: Drawer(
+          child: ListView(
+            children: [
+              ListTile(
+                onTap: () {
+                  getDatePicker(context);
+                },
+                title: Text('Filter Date!'),
+                trailing: Icon(Icons.date_range_rounded, color: Colors.black),
+              ),
+              ListTile(
+                onTap: () {
+                  getDatePicker(context);
+                },
+                title: Text('Font size!'),
+                trailing: Icon(Icons.edit, color: Colors.black),
+              ),
+            ],
+          ),
+        ),
         appBar: AppBar(
           title: const Text(
             'Personal Expenses',
           ),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.date_range_rounded),
-              onPressed: () {
-                getDatePicker(context);
-              },
-              tooltip: 'Filter date',
-            ),
-          ],
         ),
         body: GetBuilder<ExpenseController>(
           builder: (controller) {
@@ -106,58 +92,46 @@ class Homepage extends StatelessWidget {
                     physics: const AlwaysScrollableScrollPhysics(),
                     itemCount: controller.allRecords.length,
                     itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () async {
-                          await Get.dialog(getDialog(controller.allRecords[
-                              controller.allRecords.length - index - 1]));
-                        },
-                        child: Container(
-                          margin: const EdgeInsets.symmetric(
-                              vertical: 5, horizontal: 0),
-                          child: Dismissible(
-                            key: UniqueKey(),
-                            direction: DismissDirection.endToStart,
-                            onDismissed: (direction) {
-                              controller.updateLastDeletedRecord(controller
-                                      .allRecords[
+                      return Dismissible(
+                        key: UniqueKey(),
+                        direction: DismissDirection.endToStart,
+                        onDismissed: (direction) {
+                          controller.updateLastDeletedRecord(
+                              controller.allRecords[
                                   controller.allRecords.length - index - 1]);
-                              controller.deleteRecord(controller.allRecords[
-                                  controller.allRecords.length - index - 1]);
-                              controller.updateAllRecords();
-                              ScaffoldMessenger.of(context)
-                                  .removeCurrentSnackBar();
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text('Record deleted!'),
-                                  action: SnackBarAction(
-                                    label: 'Undo',
-                                    onPressed: () {
-                                      controller.addRecord(
-                                          controller.lastDeletedRecord!);
-                                      controller.updateAllRecords();
-                                    },
-                                  ),
-                                ),
-                              );
-                            },
-                            background: Container(
-                              color: Colors.red,
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
-                              child: const Align(
-                                alignment: Alignment.centerRight,
-                                child: Icon(
-                                  Icons.delete,
-                                  size: 35,
-                                  color: Colors.white,
-                                ),
+                          controller.deleteRecord(controller.allRecords[
+                              controller.allRecords.length - index - 1]);
+                          controller.updateAllRecords();
+                          ScaffoldMessenger.of(context).removeCurrentSnackBar();
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Record deleted!'),
+                              action: SnackBarAction(
+                                label: 'Undo',
+                                onPressed: () {
+                                  controller
+                                      .addRecord(controller.lastDeletedRecord!);
+                                  controller.updateAllRecords();
+                                },
                               ),
                             ),
-                            child: ExpenseItem(
-                              expenseRecord: controller.allRecords[
-                                  controller.allRecords.length - index - 1],
+                          );
+                        },
+                        background: Container(
+                          color: Colors.red,
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: const Align(
+                            alignment: Alignment.centerRight,
+                            child: Icon(
+                              Icons.delete,
+                              size: 35,
+                              color: Colors.white,
                             ),
                           ),
+                        ),
+                        child: ExpenseItem(
+                          expenseRecord: controller.allRecords[
+                              controller.allRecords.length - index - 1],
                         ),
                       );
                     },
