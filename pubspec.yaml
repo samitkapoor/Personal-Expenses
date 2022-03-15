@@ -92,6 +92,17 @@ flutter:
         - asset: assets/fonts/OpenSans-Regular.ttf
         - asset: assets/fonts/OpenSans-SemiBold.ttf
         - asset: assets/fonts/OpenSans-SemiBoldItalic.ttf
+    - family: RobotoSlab
+      fonts:
+        - asset: assets/fonts/RobotoSlab-Bold.ttf
+        - asset: assets/fonts/RobotoSlab-ExtraBold.ttf
+        - asset: assets/fonts/RobotoSlab-Light.ttf
+        - asset: assets/fonts/RobotoSlab-Medium.ttf
+        - asset: assets/fonts/RobotoSlab-Regular.ttf
+        - asset: assets/fonts/RobotoSlab-SemiBold.ttf
+        - asset: assets/fonts/RobotoSlab-Thin.ttf
+        - asset: assets/fonts/RobotoSlab-ExtraLight.ttf
+        - asset: assets/fonts/RobotoSlab-Black.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

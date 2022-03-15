@@ -21,6 +21,8 @@ class InsertRecordBottomSheet extends StatelessWidget {
           '/' +
           DateTime.now().year.toString();
       expenseRecord.id = expenseController.allRecords.length + 1;
+      expenseRecord.nameOfTheRecord =
+          expenseRecord.nameOfTheRecord.toUpperCase();
       expenseController.addRecord(expenseRecord);
       print(expenseRecord.id);
       Get.close(1);
@@ -67,14 +69,14 @@ class InsertRecordBottomSheet extends StatelessWidget {
               child: Text(
                 'Submit',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black,
                   fontSize: 25,
                   fontFamily: Get.theme.textTheme.bodyText1!.fontFamily,
                   fontWeight: Get.theme.textTheme.bodyText1!.fontWeight,
                 ),
               ),
               style: ElevatedButton.styleFrom(
-                primary: Get.theme.primaryColor,
+                primary: Color(0xff42d6ff),
                 padding: const EdgeInsets.symmetric(vertical: 5),
               ),
             ),

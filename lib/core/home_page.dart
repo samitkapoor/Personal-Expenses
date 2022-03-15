@@ -103,8 +103,6 @@ class Homepage extends StatelessWidget {
                     return Future.value();
                   },
                   child: ListView.builder(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                     physics: const AlwaysScrollableScrollPhysics(),
                     itemCount: controller.allRecords.length,
                     itemBuilder: (context, index) {
@@ -115,7 +113,7 @@ class Homepage extends StatelessWidget {
                         },
                         child: Container(
                           margin: const EdgeInsets.symmetric(
-                              vertical: 5, horizontal: 5),
+                              vertical: 5, horizontal: 0),
                           child: Dismissible(
                             key: UniqueKey(),
                             direction: DismissDirection.endToStart,
@@ -134,7 +132,6 @@ class Homepage extends StatelessWidget {
                                   action: SnackBarAction(
                                     label: 'Undo',
                                     onPressed: () {
-                                      print(controller.lastDeletedRecord?.id);
                                       controller.addRecord(
                                           controller.lastDeletedRecord!);
                                       controller.updateAllRecords();
@@ -143,15 +140,18 @@ class Homepage extends StatelessWidget {
                                 ),
                               );
                             },
-                            background: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: const [
-                                Icon(
+                            background: Container(
+                              color: Colors.red,
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: const Align(
+                                alignment: Alignment.centerRight,
+                                child: Icon(
                                   Icons.delete,
                                   size: 35,
-                                  color: Colors.red,
+                                  color: Colors.white,
                                 ),
-                              ],
+                              ),
                             ),
                             child: ExpenseItem(
                               expenseRecord: controller.allRecords[

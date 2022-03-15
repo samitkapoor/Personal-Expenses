@@ -9,9 +9,9 @@ class ExpenseItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 5),
+      padding: const EdgeInsets.symmetric(horizontal: 15),
       width: Get.width,
-      height: 60,
+      height: 70,
       decoration: BoxDecoration(
         color: Get.theme.highlightColor,
         borderRadius: BorderRadius.circular(8),
